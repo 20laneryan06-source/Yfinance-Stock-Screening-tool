@@ -51,7 +51,6 @@ def main():
 
     df = build_screener(tickers)
 
-    # ---- Optional filters (comment out or change as you like) ----
     # df = df[df["P/E Ratio"] < 30]                 # P/E under 30
     # df = df[df["Sector"] == "Technology"]         # only tech stocks
     # df = df[df["Market Cap"] > 100e9]             # market cap over $100B

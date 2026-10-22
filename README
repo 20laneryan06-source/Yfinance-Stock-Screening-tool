@@ -1,0 +1,83 @@
+
+
+A small Python program that uses the [yfinance](https://pypi.org/project/yfinance/) library to pull key stock characteristics for a list of tickers and display them in a table.
+
+## What it shows
+
+| Characteristic | What it tells you | yfinance key |
+|---|---|---|
+| Price | Current share price | `currentPrice` |
+| Market Cap | Size of the company | `marketCap` |
+| Sector | Industry classification | `sector` |
+| P/E Ratio | Price relative to earnings | `trailingPE` |
+| 52W High | Highest price in the past 52 weeks | `fiftyTwoWeekHigh` |
+| 52W Low | Lowest price in the past 52 weeks | `fiftyTwoWeekLow` |
+
+## Installation
+
+```
+py -m pip install yfinance pandas
+```
+
+
+
+Edit the `tickers` list inside main() to screen different stocks.
+
+
+### `fetch_stock(ticker)`
+
+Fetches the screener fields for a single stock.
+
+- **Input:** `ticker` (str), a stock ticker symbol. Case does not matter.
+- **Returns:** a dictionary with the ticker and each field, or `None` if the data could not be fetched. Any field Yahoo does not provide (for example, P/E for a company with no earnings) is set to `None`.
+
+```python
+fetch_stock("AAPL")
+```
+
+```python
+{
+    'Ticker': 'AAPL',
+    'Price': 227.52,
+    'Market Cap': 3430000000000,
+    'Sector': 'Technology',
+    'P/E Ratio': 34.8,
+    '52W High': 260.1,
+    '52W Low': 164.08
+}
+```
+
+### `build_screener(tickers)`
+
+Runs `fetch_stock` on every ticker in a list and combines the results into one table.
+
+- **Input:** `tickers` (list of str), for example `["AAPL", "MSFT", "NVDA"]`.
+- **Returns:** a pandas `DataFrame` with one row per stock. Tickers that fail to load are skipped.
+
+```python
+df = build_screener(["AAPL", "MSFT", "NVDA"])
+print(df)
+```
+
+### `format_market_cap(value)`
+
+Converts a large market cap number into a short, readable string.
+
+- **Input:** `value` (int or float), a market cap in dollars. `None` or NaN is also accepted.
+- **Returns:** a string ending in `T` (trillions), `B` (billions), or `M` (millions), or `"N/A"` if the value is missing.
+
+```python
+format_market_cap(3430000000000)   # '3.43T'
+format_market_cap(410200000000)    # '410.20B'
+format_market_cap(850000000)       # '850.00M'
+format_market_cap(None)            # 'N/A'
+```
+
+### `main()`
+
+The entry point. It defines the list of tickers, builds the screener table, optionally applies filters, sorts by market cap (largest first), formats the output, and prints it.
+
+- **Input:** none.
+- **Returns:** nothing (prints the table).
+
+

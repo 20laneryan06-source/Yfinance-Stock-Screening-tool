@@ -1,8 +1,6 @@
 
 
-A small Python program that uses the [yfinance](https://pypi.org/project/yfinance/) library to pull key stock characteristics for a list of tickers and display them in a table.
-
-## What it shows
+#A small Python program that uses the yfinance library to pull key stock characteristics for a list of tickers and display them in a table.
 
 | Characteristic | What it tells you | yfinance key |
 |---|---|---|
@@ -13,18 +11,18 @@ A small Python program that uses the [yfinance](https://pypi.org/project/yfinanc
 | 52W High | Highest price in the past 52 weeks | `fiftyTwoWeekHigh` |
 | 52W Low | Lowest price in the past 52 weeks | `fiftyTwoWeekLow` |
 
-## Installation
+#Installation
 
-```
+
 py -m pip install yfinance pandas
-```
+
 
 
 
 Edit the `tickers` list inside main() to screen different stocks.
 
 
-### `fetch_stock(ticker)`
+#`fetch_stock(ticker)`
 
 Fetches the screener fields for a single stock.
 
@@ -47,7 +45,7 @@ fetch_stock("AAPL")
 }
 ```
 
-### `build_screener(tickers)`
+#`build_screener(tickers)`
 
 Runs `fetch_stock` on every ticker in a list and combines the results into one table.
 
@@ -73,7 +71,7 @@ format_market_cap(850000000)       # '850.00M'
 format_market_cap(None)            # 'N/A'
 ```
 
-### `main()`
+#`main()`
 
 The entry point. It defines the list of tickers, builds the screener table, optionally applies filters, sorts by market cap (largest first), formats the output, and prints it.
 
